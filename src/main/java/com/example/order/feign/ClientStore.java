@@ -12,13 +12,13 @@ import com.example.order.vo.OrderItemVo;
 @FeignClient(name = "client", url = "${feign.url}")
 public interface ClientStore {
 
-	@RequestMapping(value= "/getDetailsById/{id}",method = RequestMethod.GET)
+	@RequestMapping(value= "/{id}",method = RequestMethod.GET)
 	List<OrderItemVo> findByOrderId(@PathVariable("id") Long orderId);
 
-	@RequestMapping(value = "/save",method = RequestMethod.POST, headers = "Content-Type: application/json")
+	@RequestMapping(value = "/",method = RequestMethod.POST, headers = "Content-Type: application/json")
 	String addOrderItemVo(List<OrderItemVo> orderVo);
 
-	@RequestMapping(value="delete/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
 	OrderItemVo deleteOrderItemVo(@PathVariable("id") Long orderId);
 
 }

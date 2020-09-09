@@ -1,5 +1,7 @@
 package com.example.order.exception;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,6 +14,11 @@ public class ExceptionController {
 
 	@ExceptionHandler(FeignException.class)
 	public ResponseEntity<Object> handleError(RuntimeException ex) {
-		return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.BAD_GATEWAY);
+		return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.FAILED_DEPENDENCY);
+	}
+	
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<Object> handleValidation(RuntimeException ex) {
+		return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 }

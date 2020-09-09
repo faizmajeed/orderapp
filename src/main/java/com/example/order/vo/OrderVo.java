@@ -3,6 +3,9 @@ package com.example.order.vo;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 public class OrderVo {
 
 	private Long orderId;
@@ -11,8 +14,10 @@ public class OrderVo {
 
 	private Date orderDate;
 
+	@NotBlank(message = "Adress should be present")
 	private String shippingAddress;
 
+	@NotEmpty(message = "Items cannot be empty")
 	private List<OrderItemVo> orderItems;
 
 	private double total;
