@@ -21,4 +21,9 @@ public class ExceptionController {
 	public ResponseEntity<Object> handleValidation(RuntimeException ex) {
 		return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(OrderException.class)
+	public ResponseEntity<Object> customErrorHandler(RuntimeException ex) {
+		return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 }
